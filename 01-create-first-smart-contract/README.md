@@ -36,8 +36,11 @@
 ### 0. Node.js インストール
 
 もし環境が整っていない場合、まずは Node.js のインストールを実施しましょう。
-https://nodejs.org/ からダウンロードできます。
-バージョンがいくつかあるかと思いますが LTS と付いているバージョンをインストールしてください。
+https://nodejs.org/en/download からダウンロードできます。
+パッケージマネージャを使ったインストール方法が出てきた場合は、Windows なら fnm、Mac なら nvm を使ってインストールするのが良さそうです。
+Node.js はバージョンアップ頻度が激しく、開発する端末にて常に最新の Node.js だけをインストールしている場合は過去に開発した Node.js プロジェクトが動かなくなってしまう可能性があるため、複数バージョンをインストールしておけるようにしたものがパッケージマネージャです。
+
+また、Node.js 本体のインストールでは LTS と付いているバージョンをインストールしてください。
 LTS は Long Term Support バージョンの最新版で、長期サポートが約束されているため（新しいバージョンの中では）最も安定しています。
 
 ### 1. プロジェクトフォルダ作成
@@ -199,7 +202,7 @@ Give Hardhat a star on Github if you're enjoying it! ⭐️✨
      https://github.com/NomicFoundation/hardhat
 ```
 
-### 3. Counter コントラクト作成
+### 4. Counter コントラクト作成
 
 開発環境が整ったので、最初のスマートコントラクトを作成してみましょう。
 https://solidity-by-example.org/first-app/
@@ -240,10 +243,236 @@ Successfully generated 8 typings!
 Compiled 2 Solidity files successfully (evm target: paris).
 ```
 
-Successfully の表記が出ていれば、今回の実習は完了です。
+### 5. ローカルブロックチェーンを動かす
+
+スマートコントラクトをブロックチェーン上で使えるようにするため、デプロイを実施します。
+本番のブロックチェーンにデプロイするよりも前に、作成したスマートコントラクトが正しく動くのかをチェックするためローカルブロックチェーンにデプロイします。
+というわけでまずはローカルブロックチェーンを動かします。
+コマンドラインツールで別タブを開き、 `1. プロジェクトフォルダ作成` を参考にプロジェクトフォルダまで移動して `npx hardhat node` を実行してください。
+
+```bash
+# ※念のため Private Key を隠させていただきます。
+$ npx hardhat node
+Started HTTP and WebSocket JSON-RPC server at http://127.0.0.1:8545/
+
+Accounts
+========
+
+WARNING: These accounts, and their private keys, are publicly known.
+Any funds sent to them on Mainnet or any other live network WILL BE LOST.
+
+Account #0: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #1: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #2: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #3: 0x90F79bf6EB2c4f870365E785982E1f101E93b906 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #4: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #5: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #6: 0x976EA74026E726554dB657fA54763abd0C3a0aa9 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #7: 0x14dC79964da2C08b23698B3D3cc7Ca32193d9955 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #8: 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #9: 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #10: 0xBcd4042DE499D14e55001CcbB24a551F3b954096 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #11: 0x71bE63f3384f5fb98995898A86B02Fb2426c5788 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #12: 0xFABB0ac9d68B0B445fB7357272Ff202C5651694a (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #13: 0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #14: 0xdF3e18d64BC6A983f673Ab319CCaE4f1a57C7097 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #15: 0xcd3B766CCDd6AE721141F452C550Ca635964ce71 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #16: 0x2546BcD3c84621e976D8185a91A922aE77ECEc30 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #17: 0xbDA5747bFD65F08deb54cb465eB87D40e51B197E (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #18: 0xdD2FD4581271e230360230F9337D5c0430Bf44C0 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Account #19: 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199 (10000 ETH)
+Private Key: 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+WARNING: These accounts, and their private keys, are publicly known.
+Any funds sent to them on Mainnet or any other live network WILL BE LOST.
+```
+
+なんとこれだけでローカルブロックチェーンを動かせます。
+動かしたら、このコマンドラインツールのタブはそのままにしておきます。
+以降は、コマンドラインツールにあるそれぞれのタブを以下のように呼称させていただきます。
+
+- 開発タブ
+  - スマートコントラクトをコンパイルしたりする方のタブ
+- ノードタブ
+  - `npx hardhat node` を動かしているタブ
+
+### 6. Counter コントラクトをローカルブロックチェーンにデプロイする
+
+デプロイには Hardhat ignition の機能を使います。
+スマートコントラクトをデプロイすると、デプロイした場所のアドレス、通称 contract address が発行されます。
+Hardhat ignition は一度デプロイしたスマートコントラクトのアドレスを保持し、以降はそのアドレスを使い回せるようになります。
+ignition フォルダの中にある modules フォルダの中に `Counter.ts` というファイルを作成し、以下を記載します。
+
+```ts
+import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
+
+const CounterModule = buildModule("CounterModule", (m) => {
+  const counter = m.contract("Counter");
+
+  return { counter };
+});
+
+export default CounterModule;
+```
+
+作成後、コマンドラインツールの開発タブで `npx hardhat ignition deploy ignition/modules/Counter.ts --network localhost` を実行してください。
+
+```bash
+$ npx hardhat ignition deploy ignition/modules/Counter.ts --network localhost
+Hardhat Ignition 🚀
+
+Deploying [ CounterModule ]
+
+Batch #1
+  Executed CounterModule#Counter
+
+[ CounterModule ] successfully deployed 🚀
+
+Deployed Addresses
+
+CounterModule#Counter - 0x5FbDB2315678afecb367f032d93F642f64180aa3
+```
+
+`npx hardhat ignition deploy` が Hardhat ignition を使ったデプロイコマンド、 `ignition/modules/Counter.ts` が具体的なデプロイ指示のファイルになります。
+`--network localhost` は、ローカルブロックチェーンを使いますという宣言です。
+こうして出力された `0x5FbDB2315678afecb367f032d93F642f64180aa3` が、スマートコントラクトをデプロイした場所のアドレス、つまり contract address となります。
+※皆さんの環境では異なる contract address になっているかもしれませんが、大丈夫です。
+
+ちなみにもう一度 `npx hardhat ignition deploy ignition/modules/Counter.ts --network localhost` をした場合、既に ignition を使ってデプロイしているため実際のデプロイ処理は走らず `0x5FbDB2315678afecb367f032d93F642f64180aa3` のみが出力されます。
+
+```bash
+$ npx hardhat ignition deploy ignition/modules/Counter.ts --network localhost
+[ CounterModule ] Nothing new to deploy based on previous execution stored in ./ignition/deployments/chain-31337
+
+Deployed Addresses
+
+CounterModule#Counter - 0x5FbDB2315678afecb367f032d93F642f64180aa3
+```
+
+### 7. デプロイした Counter コントラクトを使ってみる
+
+ローカルブロックチェーンに接続し、デプロイした Counter コントラクトを使ってみましょう。
+Hardhat console を使えば、対話型処理による JavaScript を使ったローカルブロックチェーンとのやり取りが可能です。
+コマンドラインツールの開発タブで `npx hardhat console --network localhost` を実行してください。
+
+```bash
+$ npx hardhat console --network localhost
+Welcome to Node.js v20.16.0.
+Type ".help" for more information.
+```
+
+するとコマンドラインツールには `>` が表示され、ユーザーの入力を待っている状態となります。
+`let counter = await hre.ethers.getContractAt("Counter", "0x5FbDB2315678afecb367f032d93F642f64180aa3")` を入力してみてください。
+（`0x5FbDB2315678afecb367f032d93F642f64180aa3` の部分には、あなたの環境にデプロイした Counter コントラクトの contract address を入力してください）
+
+```bash
+> let counter = await hre.ethers.getContractAt("Counter", "0x5FbDB2315678afecb367f032d93F642f64180aa3") 
+undefined
+```
+
+次に、デプロイした Counter コントラクトの現在の count 値を見てみます。
+`await counter.get()` を入力してみましょう。
+
+```bash
+> await counter.get()
+0n
+```
+
+デプロイしたばかりなので、初期値の `0` が入っています。
+`n` は、メチャクチャ大きい数値を扱う事ができる数値型の中身を見た場合に付与される文字で、一旦無視していただいて大丈夫です。
+次に、count 値を増やしてみます。
+`await counter.inc()` してから再び `await counter.get()` してみましょう。
+
+```bash
+> await counter.inc()
+ContractTransactionResponse {
+  provider: HardhatEthersProvider {
+    _hardhatProvider: LazyInitializationProviderAdapter {
+      _providerFactory: [AsyncFunction (anonymous)],
+      _emitter: [EventEmitter],
+      _initializingPromise: [Promise],
+      provider: [BackwardsCompatibilityProviderAdapter]
+    },
+    _networkName: 'localhost',
+    _blockListeners: [],
+    _transactionHashListeners: Map(0) {},
+    _eventListeners: []
+  },
+  blockNumber: 2,
+  blockHash: '0x36cda64ac6940aed4107767844c55c86d6c88f4466dab68e6456879ad1888f56',
+  index: undefined,
+  hash: '0x602c38fc4d2b9362d7297c84d84556f5b81cfd8170cb355dc9f1c4cf984662b1',
+  type: 2,
+  to: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+  from: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+  nonce: 1,
+  gasLimit: 30000000n,
+  gasPrice: 1766776712n,
+  maxPriorityFeePerGas: 1000000000n,
+  maxFeePerGas: 1970451776n,
+  maxFeePerBlobGas: null,
+  data: '0x371303c0',
+  value: 0n,
+  chainId: 31337n,
+  signature: Signature { r: "0x832a9d90258d5cea1955c99b1225b304dbdf5d52206983c00fe9446b4098d8ab", s: "0x7349e5767ae60f7fb810eff6710cecfd97507df4c2a5f8bc359375081a9af12b", yParity: 1, networkV: null },
+  accessList: [],
+  blobVersionedHashes: null
+}
+
+> await counter.get()
+1n
+```
+
+inc は count 値を変更する、つまりブロックチェーンが持つスマートコントラクトの状態を変更する function なので、トランザクションを発行しています。
+`await counter.inc()` の後に出力されているのは、発行したトランザクションに関する情報です。
+無事トランザクションが発行されてブロックに取り込まれたので、その後に実施した `await counter.get()` では `1n` が出力されている事がわかります。
+
+以上で本実習は終了となります。
+`npx hardhat node` しているノードタブは以降の実習でも使いますのでそのままにしておいてください。
+`npx hardhat console` している開発タブは対話的操作から抜け出したいので、キーボードの Ctrl(control) + C を2回押して抜け出してください。
 お疲れ様でした。
 
-### 4. Extra
+
+
+### 8. Extra
 
 次ステップとして以下を進めてみましょう。
 
@@ -256,3 +485,7 @@ Successfully の表記が出ていれば、今回の実習は完了です。
     - 見たい場合は function get を叩けば OK なので
   - count を最後に変更した address を保持し、外から見れるように function を作ってみる
   - etc...
+- 拡張した Counter コントラクトをデプロイして使ってみる
+  - 既に Hardhat ignition でデプロイしたものを新しくするには `--reset` オプションを付与して実行する必要があります
+    - `npx hardhat ignition deploy ignition/modules/Counter.ts --network localhost --reset`
+  - 追加した constructor を使いたい場合は ignition ファイルを修正する必要があります
