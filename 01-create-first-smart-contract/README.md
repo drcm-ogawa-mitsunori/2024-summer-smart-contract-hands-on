@@ -12,7 +12,7 @@
 
 ## 目的
 
-実際に手を動かしスマートコントラクトに振れる事で、この後の座学がより頭に入ってきやすくなってもらえればな、というのが意図です。
+実際に手を動かしスマートコントラクトに振れる事で、この後に続く座学の内容がより身近になっていてほしい。
 
 
 
@@ -31,9 +31,9 @@
 
 
 
-## 開発
+## 実習内容
 
-### 0. Node.js インストール
+### 0. Node.js をインストールする
 
 もし環境が整っていない場合、まずは Node.js のインストールを実施しましょう。
 https://nodejs.org/en/download からダウンロードできます。
@@ -43,7 +43,7 @@ Node.js はバージョンアップ頻度が激しく、開発する端末にて
 また、Node.js 本体のインストールでは LTS と付いているバージョンをインストールしてください。
 LTS は Long Term Support バージョンの最新版で、長期サポートが約束されているため（新しいバージョンの中では）最も安定しています。
 
-### 1. プロジェクトフォルダ作成
+### 1. プロジェクトフォルダを作成する
 
 スマートコントラクト開発現場として、プロジェクトフォルダを作成しましょう。
 コマンドラインツールを使わないで大丈夫です。
@@ -57,7 +57,7 @@ $ pwd
   -> /Users/ogawa_mitsunori/Desktop/smart-contract
 ```
 
-### 2. Hardhat インストール
+### 2. Hardhat をインストールする
 
 Hardhat とは、スマートコントラクト開発ツールです。
 npm パッケージとして提供されているので、npm を使ってインストールします。
@@ -134,7 +134,7 @@ To address all issues, run:
 Run `npm audit` for details.
 ```
 
-### 3. スマートコントラクト開発環境作成
+### 3. スマートコントラクト開発環境を作成する
 
 Hardhat を使ってスマートコントラクト開発環境を作成します。
 npm を使ってローカルにインストールしたソフトウェアを使うには `npx ◯◯◯◯` コマンドを打ちます。
@@ -202,7 +202,7 @@ Give Hardhat a star on Github if you're enjoying it! ⭐️✨
      https://github.com/NomicFoundation/hardhat
 ```
 
-### 4. Counter コントラクト作成
+### 4. Counter コントラクトを作成する
 
 開発環境が整ったので、最初のスマートコントラクトを作成してみましょう。
 https://solidity-by-example.org/first-app/
@@ -373,7 +373,7 @@ CounterModule#Counter - 0x5FbDB2315678afecb367f032d93F642f64180aa3
 
 `npx hardhat ignition deploy` が Hardhat ignition を使ったデプロイコマンド、 `ignition/modules/Counter.ts` が具体的なデプロイ指示のファイルになります。
 `--network localhost` は、ローカルブロックチェーンを使いますという宣言です。
-こうして出力された `0x5FbDB2315678afecb367f032d93F642f64180aa3` が、スマートコントラクトをデプロイした場所のアドレス、つまり contract address となります。
+こうして出力された `0x5FbDB2315678afecb367f032d93F642f64180aa3` が、スマートコントラクトをデプロイした場所のアドレス、すなわち contract address となります。
 ※皆さんの環境では異なる contract address になっているかもしれませんが、大丈夫です。
 
 ちなみにもう一度 `npx hardhat ignition deploy ignition/modules/Counter.ts --network localhost` をした場合、既に ignition を使ってデプロイしているため実際のデプロイ処理は走らず `0x5FbDB2315678afecb367f032d93F642f64180aa3` のみが出力されます。
@@ -387,7 +387,7 @@ Deployed Addresses
 CounterModule#Counter - 0x5FbDB2315678afecb367f032d93F642f64180aa3
 ```
 
-### 7. デプロイした Counter コントラクトを使ってみる
+### 7. デプロイした Counter コントラクトを動かす
 
 ローカルブロックチェーンに接続し、デプロイした Counter コントラクトを使ってみましょう。
 Hardhat console を使えば、対話型処理による JavaScript を使ったローカルブロックチェーンとのやり取りが可能です。
@@ -464,18 +464,19 @@ ContractTransactionResponse {
 inc は count 値を変更する、つまりブロックチェーンが持つスマートコントラクトの状態を変更する function なので、トランザクションを発行しています。
 `await counter.inc()` の後に出力されているのは、発行したトランザクションに関する情報です。
 無事トランザクションが発行されてブロックに取り込まれたので、その後に実施した `await counter.get()` では `1n` が出力されている事がわかります。
+※トランザクションについては、この後の座学にて少し触れます。
 
 以上で本実習は終了となります。
 `npx hardhat node` しているノードタブは以降の実習でも使いますのでそのままにしておいてください。
 `npx hardhat console` している開発タブは対話的操作から抜け出したいので、キーボードの Ctrl(control) + C を2回押して抜け出してください。
 お疲れ様でした。
 
-
-
 ### 8. Extra
 
-次ステップとして以下を進めてみましょう。
+もし時間がある方は、以下にチャレンジしてみましょう。
 
+- デプロイした Counter コントラクトの function dec も使ってみる
+  - count `0n` の時に function dec すると...？
 - Solidity 言語仕様を知る
   - https://solidity-jp.readthedocs.io/ja/latest
 - Counter コントラクトを拡張する
