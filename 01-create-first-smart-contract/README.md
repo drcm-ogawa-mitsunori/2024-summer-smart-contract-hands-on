@@ -27,7 +27,7 @@
   - デフォルトなので、Node.js が入っていれば npm も使えるようになっているかと思います
   - 筆者のバージョンは `10.8.2` です
 - コマンドラインツールが使える
-  - Windows では「コマンド プロンプト」、Mac では「ターミナル」がデフォルトのツールです
+  - Windows では「Windows PowerShell」、Mac では「ターミナル」がデフォルトのツールです
 
 
 
@@ -42,6 +42,21 @@ Node.js はバージョンアップ頻度が激しく、開発する端末にて
 
 また、Node.js 本体のインストールでは LTS と付いているバージョンをインストールしてください。
 LTS は Long Term Support バージョンの最新版で、長期サポートが約束されているため（新しいバージョンの中では）最も安定しています。
+
+#### 0-a. Docker 環境を使う
+
+もし Docker がインストールされていて動いている場合は、 Docker コンテナを使って Node.js 開発環境を動かす事ができます。
+後述する `npx hardhat node` を別途動かす必要があるため、裏で動かし続ける必要があり、以下のコマンドで Docker コンテナを作成してください。
+
+```bash
+$ docker run -d --name smartcontract node:20 /bin/bash -c 'while true; do echo HELLO; sleep 5; done'
+
+# 作成した Docker コンテナの中に入れば Node.js 環境となります
+$ docker exec -it smartcontract /bin/bash
+
+# Node.js 環境から脱出する場合は exit コマンドを打ちます
+> root@xxxxxxxxxxxx:/# exit
+```
 
 ### 1. プロジェクトフォルダを作成する
 
@@ -248,7 +263,26 @@ Compiled 2 Solidity files successfully (evm target: paris).
 スマートコントラクトをブロックチェーン上で使えるようにするため、デプロイを実施します。
 本番のブロックチェーンにデプロイするよりも前に、作成したスマートコントラクトが正しく動くのかをチェックするためローカルブロックチェーンにデプロイします。
 というわけでまずはローカルブロックチェーンを動かします。
-コマンドラインツールで別タブを開き、 `1. プロジェクトフォルダ作成` を参考にプロジェクトフォルダまで移動して `npx hardhat node` を実行してください。
+
+まずはコマンドラインツールで別タブを開き、そちらでも Node.js を使えるようにします。
+Windows かつ fnm で Node.js をインストールしている場合、開いた別タブで以下のコマンドを実行してください。
+
+```bash
+$ fnm env --use-on-cd | Out-String | Invoke-Expression
+$ fnm use --install-if-missing 20
+
+# 以下のコマンドで、それぞれのバージョンが表示されるか確認する
+$ node -v
+$ npm -v
+```
+
+もし `0. Node.js をインストールする` にて Docker コンテナを使った Node.js 環境を構築している場合は、開いた別タブで以下のコマンドを実行し、Node.js 環境に入ります。
+
+```bash
+$ docker exec -it smartcontract /bin/bash
+```
+
+次にそのタブにて、 `1. プロジェクトフォルダ作成` を参考にプロジェクトフォルダまで移動して `npx hardhat node` を実行してください。
 
 ```bash
 # ※念のため Private Key を隠させていただきます。
