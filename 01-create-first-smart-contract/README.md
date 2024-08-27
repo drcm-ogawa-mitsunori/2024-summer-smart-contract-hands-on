@@ -46,17 +46,8 @@ LTS は Long Term Support バージョンの最新版で、長期サポートが
 #### 0-a. Docker 環境を使う
 
 もし Docker がインストールされていて動いている場合は、 Docker コンテナを使って Node.js 開発環境を動かす事ができます。
-後述する `npx hardhat node` を別途動かす必要があるため、裏で動かし続ける必要があり、以下のコマンドで Docker コンテナを作成してください。
-
-```bash
-$ docker run -d --name smartcontract node:20 /bin/bash -c 'while true; do echo HELLO; sleep 5; done'
-
-# 作成した Docker コンテナの中に入れば Node.js 環境となります
-$ docker exec -it smartcontract /bin/bash
-
-# Node.js 環境から脱出する場合は exit コマンドを打ちます
-> root@xxxxxxxxxxxx:/# exit
-```
+今回は `docker compose` 機能を使って環境構築をします。
+プロジェクトフォルダに docker-compose.yml ファイルを作成する必要があるため、次のセクションで説明します。
 
 ### 1. プロジェクトフォルダを作成する
 
@@ -71,6 +62,43 @@ $ cd ~/Desktop/smart-contract
 $ pwd
   -> /Users/ogawa_mitsunori/Desktop/smart-contract
 ```
+
+#### 1-a. Docker Compose を立ち上げる
+
+Docker を使った Node.js 開発環境を構築する場合は、プロジェクトフォルダに docker-compose.yml ファイルを作成し、以下を記入してください。
+
+```yml
+version: '3'
+services:
+  app:
+    image: node:20.16.0
+    working_dir: /app
+    tty: true
+    volumes:
+      - ./:/app
+```
+
+作成後、コマンドラインツールで別タブを開き、プロジェクトフォルダまで移動し、Docker を起動します。
+
+```bash
+# 例 : Mac でデスクトップに smart-contract というフォルダを作った場合
+$ cd ~/Desktop/smart-contract
+$ pwd
+  -> /Users/ogawa_mitsunori/Desktop/smart-contract
+
+# Docker Compose として起動
+$ docker compose up
+```
+
+`Attaching to xxxxx` という出力がされるまで待機してください。
+Docker Compose を起動したコマンドラインツールタブは本ハンズオン中ずっと使用するため、そのまま放置しておいてください。
+その後、元のコマンドラインツールタブ側で Docker コンテナ内に入ります。
+
+```bash
+$ docker compose exec app /bin/bash
+```
+
+この Docker コンテナ内が Node.js 開発環境となります。
 
 ### 2. Hardhat をインストールする
 
@@ -276,10 +304,10 @@ $ node -v
 $ npm -v
 ```
 
-もし `0. Node.js をインストールする` にて Docker コンテナを使った Node.js 環境を構築している場合は、開いた別タブで以下のコマンドを実行し、Node.js 環境に入ります。
+もし `0. Node.js をインストールする` にて Docker Compose を使った Node.js 環境を構築している場合は、開いた別タブで以下のコマンドを実行し、Node.js 環境に入ります。
 
 ```bash
-$ docker exec -it smartcontract /bin/bash
+$ docker compose exec app /bin/bash
 ```
 
 次にそのタブにて、 `1. プロジェクトフォルダ作成` を参考にプロジェクトフォルダまで移動して `npx hardhat node` を実行してください。

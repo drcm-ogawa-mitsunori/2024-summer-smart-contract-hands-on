@@ -1,0 +1,8 @@
+version: '3'
+services:
+  app:
+    image: node:20.16.0
+    working_dir: /app
+    tty: true
+    volumes:
+      - ./:/app

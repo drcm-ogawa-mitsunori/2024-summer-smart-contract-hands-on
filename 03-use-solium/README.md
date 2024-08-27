@@ -169,14 +169,21 @@ empty block とは `{}` 部分を指しており、何もしていないなら�
 この「もし期待通りではなければエラー終了する」という仕組みは CI で特に役立つのですが、今回は説明を割愛させていただきます。
 
 以上で本実習は終了となります。
-もし Docker コンテナで Node.js 環境を構築している場合は、以下のコマンドで Docker コンテナを削除しておくと良いです。
+もし Docker で Node.js 環境を構築している場合は、以下のコマンドで Docker Compose 環境を止めてください。
 
 ```bash
-# Node.js 環境から脱出する場合は exit コマンドを打ちます
+# 開発タブは exit コマンドを打ち、Docker から抜けます
 > root@xxxxxxxxxxxx:/# exit
+```
 
-# 以下のコマンドで Docker コンテナを削除します
-$ docker rm -f smartcontract
+```bash
+# ノードタブは Ctrl + C を押して npx hardhat node を終了後に exit コマンドを打ち、Docker から抜けます
+> root@xxxxxxxxxxxx:/# exit
+```
+
+```bash
+# Docker Compose 実行していたタブでは Ctrl + C を押し、以下のコマンドで Docker コンテナを削除します
+$ docker compose rm -f
 ```
 
 お疲れ様でした。
